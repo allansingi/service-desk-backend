@@ -1,6 +1,7 @@
 package pt.allanborges.userserviceapi.service;
 
 import lombok.RequiredArgsConstructor;
+import models.exceptions.ResourceNotFoundException;
 import models.responses.UserResponse;
 import org.springframework.stereotype.Service;
 import pt.allanborges.userserviceapi.mapper.UserMapper;
@@ -15,7 +16,10 @@ public class UserService {
 
     public UserResponse findById(final String id) {
         return userMapper.fromEntity(
-                userRepository.findById(id).orElse(null)
+                userRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException(
+                                "Object not found. Id: " + id + ", Type: " + UserResponse.class.getSimpleName()
+                        ))
         );
     }
 
