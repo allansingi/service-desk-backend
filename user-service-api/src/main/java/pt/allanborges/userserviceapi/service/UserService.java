@@ -2,6 +2,7 @@ package pt.allanborges.userserviceapi.service;
 
 import lombok.RequiredArgsConstructor;
 import models.exceptions.ResourceNotFoundException;
+import models.requests.CreateUserRequest;
 import models.responses.UserResponse;
 import org.springframework.stereotype.Service;
 import pt.allanborges.userserviceapi.mapper.UserMapper;
@@ -21,6 +22,10 @@ public class UserService {
                                 "Object not found. Id: " + id + ", Type: " + UserResponse.class.getSimpleName()
                         ))
         );
+    }
+
+    public void save(CreateUserRequest createUserRequest) {
+        userRepository.save(userMapper.fromRequest(createUserRequest));
     }
 
 }

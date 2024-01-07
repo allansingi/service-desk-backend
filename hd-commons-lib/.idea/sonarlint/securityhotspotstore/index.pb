@@ -9,3 +9,5 @@ n
 >src/main/java/models/exceptions/ResourceNotFoundException.java,6\c\6c2db6645cb42d88291a99b7c932085fe3d9232b
 b
 2src/main/java/models/exceptions/StandardError.java,c\7\c782f967301709ce330b75934b4a9e3339b3694b
+d
+4src/main/java/models/requests/CreateUserRequest.java,6\a\6a612d48b308efe5d2d73aa18e5e044111f1dd21
