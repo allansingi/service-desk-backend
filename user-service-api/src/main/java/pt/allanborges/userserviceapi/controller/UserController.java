@@ -37,6 +37,9 @@ public interface UserController {
     @GetMapping("/{id}")
     ResponseEntity<UserResponse> findById(
             @Parameter(description = "User id", required = true, example = "659978f4a99ccf2287de3161")
-            @PathVariable(name = "id") final String id);
+            @PathVariable(name = "id") final String id
+    );
+
+    ResponseEntity<Void> save()
 
 }
