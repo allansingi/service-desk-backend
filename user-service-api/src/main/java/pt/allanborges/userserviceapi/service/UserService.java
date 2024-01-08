@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import pt.allanborges.userserviceapi.mapper.UserMapper;
 import pt.allanborges.userserviceapi.repository.UserRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -38,4 +41,9 @@ public class UserService {
                 });
     }
 
+    public List<UserResponse> findAll() {
+        return userRepository.findAll()
+                .stream().map(userMapper::fromEntity)
+                .toList();
+    }
 }
