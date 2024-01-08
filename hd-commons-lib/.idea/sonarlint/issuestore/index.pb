@@ -13,3 +13,5 @@ d
 4src/main/java/models/requests/CreateUserRequest.java,6\a\6a612d48b308efe5d2d73aa18e5e044111f1dd21
 h
 8src/main/java/models/exceptions/ValidationException.java,7\2\7215508cf46fc7128a4d6956365f711c02f1b93a
+d
+4src/main/java/models/requests/UpdateUserRequest.java,8\8\88fc0df29513ccee43a7bbcfc52db17459e2e07b
