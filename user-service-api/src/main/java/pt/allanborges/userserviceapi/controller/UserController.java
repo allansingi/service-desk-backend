@@ -42,7 +42,7 @@ public interface UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User Created"),
             @ApiResponse(
-                    responseCode = "400", description = "Bad Request",
+                    responseCode = "409 ", description = "Data Integrity Violation",
                     content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = StandardError.class))
             ),
             @ApiResponse(

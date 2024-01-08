@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import models.exceptions.ResourceNotFoundException;
 import models.requests.CreateUserRequest;
 import models.responses.UserResponse;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import pt.allanborges.userserviceapi.mapper.UserMapper;
 import pt.allanborges.userserviceapi.repository.UserRepository;
@@ -25,7 +26,16 @@ public class UserService {
     }
 
     public void save(CreateUserRequest createUserRequest) {
+        verifyIfEmailAlreadyExists(createUserRequest.email(), null);
         userRepository.save(userMapper.fromRequest(createUserRequest));
+    }
+
+    private void verifyIfEmailAlreadyExists(final String email, final String id) {
+        userRepository.findByEmail(email)
+                .filter(user -> !user.getId().equals(id))
+                .ifPresent(user -> {
+                    throw new DataIntegrityViolationException("Email [ " + email + " ] already exists");
+                });
     }
 
 }
