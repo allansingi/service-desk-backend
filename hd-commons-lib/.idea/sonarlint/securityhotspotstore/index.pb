@@ -11,3 +11,5 @@ b
 2src/main/java/models/exceptions/StandardError.java,c\7\c782f967301709ce330b75934b4a9e3339b3694b
 d
 4src/main/java/models/requests/CreateUserRequest.java,6\a\6a612d48b308efe5d2d73aa18e5e044111f1dd21
+h
+8src/main/java/models/exceptions/ValidationException.java,7\2\7215508cf46fc7128a4d6956365f711c02f1b93a
