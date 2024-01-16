@@ -13,8 +13,7 @@ import pt.allanborges.userserviceapi.repository.UserRepository;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CONFLICT;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -110,6 +109,29 @@ class UserControllerImplTest {
                 .andExpect(jsonPath("$.path").value(BASE_URI))
                 .andExpect(jsonPath("$.status").value(CONFLICT.value()))
                 .andExpect(jsonPath("$.timestamp").isNotEmpty());
+
+        userRepository.deleteById(entity.getId());
+    }
+
+    @Test
+    void testSaveUserWithNameEmptyThenThrowBadRequest() throws Exception {
+        final var entity = generateMock(User.class).withEmail(VALID_EMAIL);
+
+        userRepository.save(entity);
+
+        final var request = generateMock(CreateUserRequest.class).withName("").withEmail(VALID_EMAIL);
+
+        mockMvc.perform(post(BASE_URI)
+                        .contentType(APPLICATION_JSON)
+                        .content(toJson(request))
+                ).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Exception in validation attributes"))
+                .andExpect(jsonPath("$.error").value("Validation Exception"))
+                .andExpect(jsonPath("$.path").value(BASE_URI))
+                .andExpect(jsonPath("$.status").value(BAD_REQUEST.value()))
+                .andExpect(jsonPath("$.timestamp").isNotEmpty())
+                .andExpect(jsonPath("$.errors[?(@.fieldName=='name' && @.message=='Name must contain between 3 and 50 characters')]").exists())
+                .andExpect(jsonPath("$.errors[?(@.fieldName=='name' && @.message=='Name cannot be empty')]").exists());
 
         userRepository.deleteById(entity.getId());
     }
