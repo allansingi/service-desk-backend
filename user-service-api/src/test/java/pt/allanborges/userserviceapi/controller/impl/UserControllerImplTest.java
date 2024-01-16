@@ -1,5 +1,7 @@
 package pt.allanborges.userserviceapi.controller.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import models.requests.CreateUserRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,7 +14,9 @@ import pt.allanborges.userserviceapi.repository.UserRepository;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static pt.allanborges.userserviceapi.creator.CreatorUtils.generateMock;
@@ -73,5 +77,25 @@ class UserControllerImplTest {
         userRepository.deleteAll(List.of(entity1, entity2));
     }
 
+    @Test
+    void testSaveUserWithSuccess() throws Exception {
+        final var validEmail = "kmjnjnur@mail.com";
+        final var request = generateMock(CreateUserRequest.class).withEmail(validEmail);
+
+        mockMvc.perform(post("/api/users")
+                .contentType(APPLICATION_JSON)
+                .content(toJson(request))
+        ).andExpect(status().isCreated());
+
+        userRepository.deleteByEmail(validEmail);
+    }
+
+    private String toJson(final Object object) throws Exception {
+        try {
+            return new ObjectMapper().writeValueAsString(object);
+        } catch (final Exception e) {
+            throw new Exception("Error to convert object to json" + e);
+        }
+    }
 
 }
