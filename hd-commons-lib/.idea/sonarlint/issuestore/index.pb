@@ -15,3 +15,9 @@ h
 8src/main/java/models/exceptions/ValidationException.java,7\2\7215508cf46fc7128a4d6956365f711c02f1b93a
 d
 4src/main/java/models/requests/UpdateUserRequest.java,8\8\88fc0df29513ccee43a7bbcfc52db17459e2e07b
+f
+6src/main/java/models/requests/AuthenticateRequest.java,9\9\99b15c247368fd2868849684d0801508bff5596b
+i
+9src/main/java/models/responses/AuthenticationRespose.java,5\a\5a54e310b8ec8425cad04f15ab74eae65e1413eb
+j
+:src/main/java/models/responses/AuthenticationResponse.java,f\0\f05475f1bf4f13372028f9613a847f5d26afd936
