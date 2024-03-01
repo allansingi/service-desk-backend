@@ -1,4 +1,4 @@
-package pt.allanborges.userserviceapi.controller.config;
+package pt.allanborges.userserviceapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
