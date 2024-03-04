@@ -1,3 +1,9 @@
 spring:
   application:
     name: 'auth-service-api'
+  data:
+    mongodb:
+      uri: 'mongodb+srv://help-desk-user:help-desk-user@clusterhelpdesk.nvn4kcx.mongodb.net/helpdeskdb?retryWrites=true&w=majority'
+
+jwt.secret: 'xAhAk2lcHMzRBgLLqzE9NZNV/SUBrh/5RzFnzFFc6oe9/23APlS1PdtYOKfM4+NQqryjhMFaLKXXUPA+pAaazQfmuRCsuE+lutZZ5ZnHZPM='
+jwt.expiration: 120000

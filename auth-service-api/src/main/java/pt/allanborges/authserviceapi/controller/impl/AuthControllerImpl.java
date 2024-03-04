@@ -1,20 +1,27 @@
 package pt.allanborges.authserviceapi.controller.impl;
 
+import lombok.RequiredArgsConstructor;
 import models.requests.AuthenticateRequest;
 import models.responses.AuthenticationResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.web.bind.annotation.RestController;
 import pt.allanborges.authserviceapi.controller.AuthController;
+import pt.allanborges.authserviceapi.secutiry.dtos.JWTAuthenticationImpl;
+import pt.allanborges.authserviceapi.utils.JWTUtils;
 
 @RestController
+@RequiredArgsConstructor
 public class AuthControllerImpl implements AuthController {
 
+    private final JWTUtils jwtUtils;
+    private final AuthenticationConfiguration authenticationConfiguration;
+
     @Override
-    public ResponseEntity<AuthenticationResponse> authenticate(AuthenticateRequest request) {
-        return ResponseEntity.ok().body(AuthenticationResponse.builder()
-                        .type("Bearer")
-                        .token("token")
-                .build());
+    public ResponseEntity<AuthenticationResponse> authenticate(AuthenticateRequest request) throws Exception {
+        return ResponseEntity.ok().body(
+                new JWTAuthenticationImpl(jwtUtils, authenticationConfiguration.getAuthenticationManager()).authenticate(request)
+        );
     }
 
 }
