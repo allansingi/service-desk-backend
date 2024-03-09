@@ -7,3 +7,4 @@ spring:
 
 jwt.secret: 'xAhAk2lcHMzRBgLLqzE9NZNV/SUBrh/5RzFnzFFc6oe9/23APlS1PdtYOKfM4+NQqryjhMFaLKXXUPA+pAaazQfmuRCsuE+lutZZ5ZnHZPM='
 jwt.expiration: 120000
+jwt.expiration-sec.refresh-token: 10

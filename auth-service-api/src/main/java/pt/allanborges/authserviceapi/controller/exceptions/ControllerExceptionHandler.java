@@ -1,11 +1,11 @@
 package pt.allanborges.authserviceapi.controller.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
+import models.exceptions.RefreshTokenExpired;
 import models.exceptions.StandardError;
 import models.exceptions.ValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.ArrayList;
 
 import static java.time.LocalDateTime.now;
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(BadCredentialsException.class)
-    ResponseEntity<StandardError> handleBadCredentialsException(final BadCredentialsException ex, final HttpServletRequest request) {
+    @ExceptionHandler({BadCredentialsException.class, RefreshTokenExpired.class})
+    ResponseEntity<StandardError> handleBadCredentialsException(final RuntimeException ex, final HttpServletRequest request) {
         return ResponseEntity.status(UNAUTHORIZED).body(
                 StandardError.builder()
                         .timestamp(now())

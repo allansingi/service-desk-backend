@@ -19,3 +19,9 @@ f
 6src/main/java/models/requests/AuthenticateRequest.java,9\9\99b15c247368fd2868849684d0801508bff5596b
 j
 :src/main/java/models/responses/AuthenticationResponse.java,f\0\f05475f1bf4f13372028f9613a847f5d26afd936
+h
+8src/main/java/models/responses/RefreshTokenResponse.java,a\8\a8588130335b1981e7c3ee61ca4e509e04c13005
+f
+6src/main/java/models/requests/RefreshTokenRequest.java,7\1\7169782b7984b96fabf6ef3346cca88535b855d8
+h
+8src/main/java/models/exceptions/RefreshTokenExpired.java,2\4\24d45879d5e8e01c0713d63267cb7dfd661c06b3
