@@ -19,23 +19,23 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository repository;
-    private final UserMapper mapper;
+    private final UserMapper userMapper;
     private final BCryptPasswordEncoder encoder;
 
     public UserResponse findById(final String id) {
-        return mapper.fromEntity(find(id));
+        return userMapper.fromEntity(find(id));
     }
 
     public List<UserResponse> findAll() {
         return repository.findAll()
-                .stream().map(mapper::fromEntity)
+                .stream().map(userMapper::fromEntity)
                 .toList();
     }
 
     public void save(CreateUserRequest request) {
         verifyIfEmailAlreadyExists(request.email(), null);
         repository.save(
-                mapper.fromRequest(request)
+                userMapper.fromRequest(request)
                         .withPassword(encoder.encode(request.password()))
         );
     }
@@ -43,9 +43,9 @@ public class UserService {
     public UserResponse update(final String id, final UpdateUserRequest request) {
         User entity = find(id);
         verifyIfEmailAlreadyExists(request.email(), id);
-        return mapper.fromEntity(
+        return userMapper.fromEntity(
                 repository.save(
-                        mapper.update(request, entity)
+                        userMapper.update(request, entity)
                                 .withPassword(request.password() != null ? encoder.encode(request.password()) : entity.getPassword())
                 )
         );

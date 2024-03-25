@@ -16,7 +16,7 @@ public record CreateUserRequest(
         @Size(min = 3, max = 50, message = "Name must contain between 3 and 50 characters")
         String name,
 
-        @Schema(description = "User email", example = "JoeMacdonald@gmail.com")
+        @Schema(description = "User email", example = "joemacdonald@gmail.com")
         @NotBlank(message = "Email cannot be empty")
         @Email(message = "Invalid email")
         @Size(min = 6, max = 50, message = "Email must contain between 3 and 50 characters")
