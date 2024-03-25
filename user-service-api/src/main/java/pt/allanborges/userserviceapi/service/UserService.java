@@ -40,13 +40,13 @@ public class UserService {
         );
     }
 
-    public UserResponse update(final String id, final UpdateUserRequest request) {
+    public UserResponse update(final String id, final UpdateUserRequest updateUserRequest) {
         User entity = find(id);
-        verifyIfEmailAlreadyExists(request.email(), id);
+        verifyIfEmailAlreadyExists(updateUserRequest.email(), id);
         return userMapper.fromEntity(
                 repository.save(
-                        userMapper.update(request, entity)
-                                .withPassword(request.password() != null ? encoder.encode(request.password()) : entity.getPassword())
+                        userMapper.update(updateUserRequest, entity)
+                                .withPassword(updateUserRequest.password() != null ? encoder.encode(updateUserRequest.password()) : entity.getPassword())
                 )
         );
     }
